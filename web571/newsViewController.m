@@ -55,7 +55,7 @@
     
     _symbol = broken[0];
     
-    NSString *urlString = [@"http://cs-server.usc.edu:17897/examples/servlet/finance_search?input=" stringByAppendingString:_symbol];
+    NSString *urlString = [@"http://default-environment-cpfjs3sgdp.elasticbeanstalk.com/?symbol=" stringByAppendingString:_symbol];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     
     

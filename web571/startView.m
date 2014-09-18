@@ -240,7 +240,7 @@
     
     [self.searchDisplayController setActive:NO animated:YES];
     
-    NSString *urlString = @"http://jasonpparser-env.elasticbeanstalk.com/?symbol=";
+    NSString *urlString = @"http://default-environment-cpfjs3sgdp.elasticbeanstalk.com/?symbol=";
     
     NSArray *inputArray = [stringInput componentsSeparatedByString:@","];
     stringInput = inputArray[0];
@@ -253,7 +253,7 @@
     [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         _responseString  = [operation responseString];
-        
+        //NSLog(_responseString);
         NSData *jsonData = [_responseString dataUsingEncoding:NSUTF8StringEncoding];
         NSError *e;
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:jsonData options:nil error:&e];
@@ -261,7 +261,10 @@
        NSDictionary *monday = dict[@"result"];
         
              _symboltotal = monday[@"Symbol"] ;
+       
             _nametotal = monday[@"Name"];
+        
+       
         
             NSString *subsug  = [_nametotal stringByAppendingString:@"("];
             subsug = [subsug stringByAppendingString:_symboltotal];
@@ -271,9 +274,13 @@
         NSDictionary *quote = monday[@"Quote"];
         
         NSString *lastTradeOnly = quote[@"LastTradePriceOnly"];
-        _ltpo.text = lastTradeOnly;
+        
+            _ltpo.text = lastTradeOnly;
         
         NSString *change = quote[@"Change"];
+        
+        
+        
         NSString *changeinpercent = quote[@"ChangeInPercent"];
         if([change isEqualToString:@""]){
             
@@ -295,7 +302,7 @@
         changeinpercent = [changeinpercent stringByAppendingString:@"%)"];
         _arrayImage.image = nil;
         if([quote[@"ChangeType"] isEqualToString:@"-"]){
-            NSURL *url = [NSURL URLWithString:@"http://cs-server.usc.edu:17897/examples/servlets/down_r.gif"];
+            NSURL *url = [NSURL URLWithString:@"https://s.yimg.com/lq/i/us/fi/03rd/down_r.gif"];
             NSData *data = [[NSData alloc]initWithContentsOfURL:url ];
             UIImage *img = [[UIImage alloc]initWithData:data ];
             
@@ -307,7 +314,7 @@
             _changeinpercent.text = changeinpercent;
         }
         if([quote[@"ChangeType"] isEqualToString:@"+"]){
-            NSURL *url = [NSURL URLWithString:@"http://cs-server.usc.edu:17897/examples/servlets/up_g.gif"];
+            NSURL *url = [NSURL URLWithString:@"https://s.yimg.com/lq/i/us/fi/03rd/up_g.gif"];
             NSData *data = [[NSData alloc]initWithContentsOfURL:url ];
             UIImage *img = [[UIImage alloc]initWithData:data ];
             
@@ -341,10 +348,12 @@
         NSString *yl = quote[@"YearLow"];
         NSString *yh = quote[@"YearHigh"];
         
+        
         _pvclose.text = prevclose;
         _open.text = open;
-        _bid.text = bid;
+        _bid.text = @"N/A";
         _ask.text = ask;
+        //NSLog(oneyeartarget);
         _sttar.text = oneyeartarget;
         if(![dh isEqualToString:@""]&&![dl isEqualToString:@""]){
             NSString *dr = [dl stringByAppendingString:@" - "];
@@ -371,6 +380,7 @@
         NSString *chartUrl = monday[@"StockChartImageURL"];
         chartUrl = [chartUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         _chart = chartUrl;
+        
         NSURL *url = [NSURL URLWithString:chartUrl];
         NSData *data = [[NSData alloc]initWithContentsOfURL:url ];
         UIImage *img = [[UIImage alloc]initWithData:data ];
@@ -381,9 +391,9 @@
         NSLog(@"Error: %@", error);
     }];
 
-   
-    
 }
+
+
 - (IBAction)FaceBook:(id)sender {
     
     NSString *linkurl = [@"http://finance.yahoo.com/q?s=" stringByAppendingString:_symboltotal];
