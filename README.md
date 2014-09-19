@@ -5,7 +5,7 @@ first install facebook sdk that is included in this file
 
 Then run the project named web 571
 
-<video src="https://www.youtube.com/watch?v=wIqFu9T5Aqk&feature=youtube_gdata"></video>
+[![Alt text for your video](http://img.youtube.com/vi/wIqFu9T5Aqk/0.jpg)](https://www.youtube.com/watch?v=wIqFu9T5Aqk&feature=youtube_gdata)
 
 <h1> Searching empty name </h1>
 <img src = "http://www-scf.usc.edu/~wenjiaxi/2.png" height="300" width="192">
