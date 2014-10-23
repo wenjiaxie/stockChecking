@@ -4,7 +4,7 @@ Stocking Checkinbg IOS APP
 first install facebook sdk that is included in this file
 
 Then run the project named web 571
-
+<center><h2>Video</h2></center>
 [![Alt text for your video](http://img.youtube.com/vi/wIqFu9T5Aqk/0.jpg)](https://www.youtube.com/watch?v=wIqFu9T5Aqk&feature=youtube_gdata)
 
 <h1> Searching empty name </h1>
