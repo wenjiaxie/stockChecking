@@ -29,3 +29,8 @@ Then run the project named web 571
 <img src = "http://www-scf.usc.edu/~wenjiaxi/7.png" height="300" width="192">
 <h1>facebook status</h1>
 <img src = "http://www-scf.usc.edu/~wenjiaxi/10.png" height="300" width="192">
+
+<h2> Web(HTML Ajax) Version</h2>
+<img src = "http://www-scf.usc.edu/~wenjiaxi/s1.png" height="300" width="192">
+<img src = "http://www-scf.usc.edu/~wenjiaxi/s2.png" height="300" width="192">
+<img src = "http://www-scf.usc.edu/~wenjiaxi/s3.png" height="300" width="192">
