@@ -154,7 +154,7 @@
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     [manager GET:URLstring parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){_responseString  = [operation responseString];
-        NSLog(@"%@",responseObject);
+        //NSLog(@"%@",responseObject);
         
         NSArray *JsonValue = [_responseString componentsSeparatedByString:@"["];
         NSString *processedJson = JsonValue[1];
@@ -260,21 +260,42 @@
         
        NSDictionary *monday = dict[@"result"];
         
+       
              _symboltotal = monday[@"Symbol"] ;
        
             _nametotal = monday[@"Name"];
         
-       
+        @try{
+            _symboltotal.length;
+            
+        }
+        @catch(NSException *e1){
+            _symboltotal =@"";
+        }
+        @try{
+             _nametotal.length;
+            
+        }
+        @catch(NSException *e1){
+             _nametotal =@"";
+        }
+        NSString *subsug;
         
-            NSString *subsug  = [_nametotal stringByAppendingString:@"("];
+            subsug  = [_nametotal stringByAppendingString:@"("];
             subsug = [subsug stringByAppendingString:_symboltotal];
             subsug = [subsug stringByAppendingString:@")"];
             _nameText.text = subsug;
-        
+      
         NSDictionary *quote = monday[@"Quote"];
         
         NSString *lastTradeOnly = quote[@"LastTradePriceOnly"];
-        
+        @try{
+            lastTradeOnly.length;
+            
+        }
+        @catch(NSException *e1){
+            lastTradeOnly =@"";
+        }
             _ltpo.text = lastTradeOnly;
         
         NSString *change = quote[@"Change"];
@@ -282,9 +303,20 @@
         
         
         NSString *changeinpercent = quote[@"ChangeInPercent"];
+        
+        @try{
+            change.length;
+            
+        }
+        @catch(NSException *e1){
+            change =@"";
+            
+        }
+        
         if([change isEqualToString:@""]){
             
             [[[UIAlertView alloc] initWithTitle:@"" message:@"Stock Information Not Found!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil] show];
+            return;
         }
         else{
             
@@ -295,13 +327,24 @@
             
             [self.searchDisplayController setActive:NO animated:YES];
             
-            _passSymbol = _symboltotal;
+           
+        }
+        
+        NSString *changetype =quote[@"ChangeType"];
+        
+        @try{
+            changetype.length;
+        }
+        @catch (NSException *e11){
+            changetype = @"+";
+           
         }
         
         changeinpercent = [@"(" stringByAppendingString:changeinpercent];
         changeinpercent = [changeinpercent stringByAppendingString:@"%)"];
         _arrayImage.image = nil;
-        if([quote[@"ChangeType"] isEqualToString:@"-"]){
+        
+        if([changetype isEqualToString:@"-"]){
             NSURL *url = [NSURL URLWithString:@"https://s.yimg.com/lq/i/us/fi/03rd/down_r.gif"];
             NSData *data = [[NSData alloc]initWithContentsOfURL:url ];
             UIImage *img = [[UIImage alloc]initWithData:data ];
@@ -313,7 +356,7 @@
             _change.text = change;
             _changeinpercent.text = changeinpercent;
         }
-        if([quote[@"ChangeType"] isEqualToString:@"+"]){
+        if([changetype isEqualToString:@"+"]){
             NSURL *url = [NSURL URLWithString:@"https://s.yimg.com/lq/i/us/fi/03rd/up_g.gif"];
             NSData *data = [[NSData alloc]initWithContentsOfURL:url ];
             UIImage *img = [[UIImage alloc]initWithData:data ];
@@ -325,7 +368,9 @@
             _change.text = change;
             _changeinpercent.text = changeinpercent;
         }
-        if([quote[@"ChangeType"] isEqualToString:@""]){
+     
+        
+        if([changetype isEqualToString:@""]){
             
             _change.textColor = [UIColor greenColor];
             _changeinpercent.textColor = [UIColor greenColor];
@@ -333,7 +378,7 @@
             _changeinpercent.text = @"(0.00%)";
         }
         
-        _ct = quote[@"ChangeType"];
+        _ct = changetype;
         
         NSString *prevclose = quote[@"PreviousClose"];
         NSString *bid = quote[@"Bid"];
@@ -349,11 +394,95 @@
         NSString *yh = quote[@"YearHigh"];
         
         
+        @try{
+          int a =  prevclose.length;
+            NSLog(@"%d",a);
+        }
+        @catch(NSException *e1){
+            prevclose = @"N/A";
+        }
         _pvclose.text = prevclose;
+        
+        @try{
+            open.length;
+           
+        }
+        @catch(NSException *e1){
+            open = @"N/A";
+        }
+        
         _open.text = open;
-        _bid.text = @"N/A";
+        @try{
+            bid.length;
+        }
+        @catch(NSException *e1){
+            bid = @"N/A";
+        }
+        _bid.text = bid;
+        
+        @try{
+            ask.length;
+        }
+        @catch(NSException *e1){
+            ask = @"N/A";
+        }
+        
         _ask.text = ask;
         //NSLog(oneyeartarget);
+        
+        @try{
+            oneyeartarget.length;
+        }
+        @catch(NSException *e1){
+            oneyeartarget = @"N/A";
+        }
+        @try{
+            dh.length;
+        }
+        @catch(NSException *e1){
+            dh = @"N/A";
+        }
+        @try{
+            dl.length;
+        }
+        @catch(NSException *e1){
+            dl = @"N/A";
+        }
+        
+        @try{
+            yh.length;
+        }
+        @catch(NSException *e1){
+            yh = @"N/A";
+        }
+        @try{
+            yl.length;
+        }
+        @catch(NSException *e1){
+            yl = @"N/A";
+        }
+        
+        @try{
+            volume.length;
+        }
+        @catch(NSException *e1){
+            volume = @"N/A";
+        }
+        
+        @try{
+            avgvolume.length;
+        }
+        @catch(NSException *e1){
+            avgvolume = @"N/A";
+        }
+        
+        @try{
+            cap.length;
+        }
+        @catch(NSException *e1){
+            cap = @"N/A";
+        }
+        
         _sttar.text = oneyeartarget;
         if(![dh isEqualToString:@""]&&![dl isEqualToString:@""]){
             NSString *dr = [dl stringByAppendingString:@" - "];
